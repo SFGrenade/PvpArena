@@ -22,7 +22,7 @@ namespace PvpArena.MonoBehaviours.Patcher
             {
                 var pdBoolVal = PlayerData.instance.GetBool(pdBool);
 
-                GameObject actualBlocker = GameObject.Instantiate(PrefabHolder.popQuakeFloorPrefab, transform.parent, true);
+                GameObject actualBlocker = Instantiate(PrefabHolder.PopQuakeFloorPrefab, transform.parent, true);
                 actualBlocker.SetActive(false);
                 actualBlocker.transform.position = transform.position;
                 actualBlocker.transform.localScale = transform.lossyScale;
@@ -71,7 +71,7 @@ namespace PvpArena.MonoBehaviours.Patcher
 
                 actualBlocker.SetActive(true);
 
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else if (type == Type.WALL)
             {

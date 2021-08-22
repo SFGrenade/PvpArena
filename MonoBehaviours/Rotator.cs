@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using SFCore.Utils;
 using UnityEngine;
 using Logger = Modding.Logger;
 
@@ -16,7 +14,7 @@ namespace PvpArena.MonoBehaviours
         public void Awake()
         {
             var hmPrefab = Resources.FindObjectsOfTypeAll<HealthManager>()[0];
-            var hm = this.gameObject.AddComponent<HealthManager>();
+            var hm = gameObject.AddComponent<HealthManager>();
 
             Dictionary<string, FieldInfo> fis = new Dictionary<string, FieldInfo>();
             foreach (var fi in typeof(HealthManager).GetFields(BindingFlags.NonPublic | BindingFlags.Instance))

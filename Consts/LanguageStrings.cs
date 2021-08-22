@@ -7,7 +7,7 @@ namespace PvpArena.Consts
 {
     public class LanguageStrings
     {
-        private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> jsonDict;
+        private readonly Dictionary<string, Dictionary<string, Dictionary<string, string>>> _jsonDict;
 
         public LanguageStrings()
         {
@@ -22,7 +22,7 @@ namespace PvpArena.Consts
 
                 string json = System.Text.Encoding.Default.GetString(buffer);
 
-                jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
+                _jsonDict = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, Dictionary<string, string>>>>(json);
             }
         }
 
@@ -31,11 +31,11 @@ namespace PvpArena.Consts
             GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;
             try
             {
-                return jsonDict[lang.ToString()][sheet][key].Replace("<br>", "\n");
+                return _jsonDict[lang.ToString()][sheet][key].Replace("<br>", "\n");
             }
             catch
             {
-                return jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet][key].Replace("<br>", "\n");
+                return _jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet][key].Replace("<br>", "\n");
             }
         }
 
@@ -46,13 +46,13 @@ namespace PvpArena.Consts
                 GlobalEnums.SupportedLanguages lang = GameManager.instance.gameSettings.gameLanguage;
                 try
                 {
-                    return jsonDict[lang.ToString()][sheet].ContainsKey(key);
+                    return _jsonDict[lang.ToString()][sheet].ContainsKey(key);
                 }
                 catch
                 {
                     try
                     {
-                        return jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet].ContainsKey(key);
+                        return _jsonDict[GlobalEnums.SupportedLanguages.EN.ToString()][sheet].ContainsKey(key);
                     }
                     catch
                     {

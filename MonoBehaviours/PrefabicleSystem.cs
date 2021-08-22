@@ -15,24 +15,24 @@ namespace PvpArena.MonoBehaviours
         public int maxPrefabicles = 100;
         public LayerMask layersToRemoveFrom;
 
-        private float timer = 0f;
-        private List<GameObject> instances = new List<GameObject>();
+        private float _timer = 0f;
+        private List<GameObject> _instances = new List<GameObject>();
 
         private void FixedUpdate()
         {
             if (prefab == null) return;
 
-            timer -= Time.fixedDeltaTime;
-            if (timer < 0)
+            _timer -= Time.fixedDeltaTime;
+            if (_timer < 0)
             {
                 Spawn();
-                timer = 1f / spawnsPerSecond;
+                _timer = 1f / spawnsPerSecond;
             }
 
-            while (instances.Count > maxPrefabicles)
+            while (_instances.Count > maxPrefabicles)
             {
-                GameObject.DestroyImmediate(instances[0], true);
-                instances.RemoveAt(0);
+                DestroyImmediate(_instances[0], true);
+                _instances.RemoveAt(0);
             }
         }
 
@@ -52,7 +52,7 @@ namespace PvpArena.MonoBehaviours
                 nic.layersToRemoveFrom = layersToRemoveFrom;
                 nic.callback = RemoveGo;
 
-                instances.Add(tmpGo);
+                _instances.Add(tmpGo);
             }
             else
             {
@@ -66,14 +66,14 @@ namespace PvpArena.MonoBehaviours
                 nic.layersToRemoveFrom = layersToRemoveFrom;
                 nic.callback = RemoveGo;
 
-                instances.Add(tmpGo);
+                _instances.Add(tmpGo);
             }
         }
 
         public void RemoveGo(GameObject go)
         {
-            instances.Remove(go);
-            timer = 0f;
+            _instances.Remove(go);
+            _timer = 0f;
         }
 
         public class NotInCollider : MonoBehaviour
@@ -84,13 +84,13 @@ namespace PvpArena.MonoBehaviours
             private void Start()
             {
                 bool t = false;
-                foreach (var c in this.GetComponentsInChildren<Collider2D>())
+                foreach (var c in GetComponentsInChildren<Collider2D>())
                     t |= c.IsTouchingLayers(layersToRemoveFrom);
 
                 if (t)
                 {
                     callback.Invoke(gameObject);
-                    GameObject.Destroy(gameObject);
+                    Destroy(gameObject);
                 }
             }
         }

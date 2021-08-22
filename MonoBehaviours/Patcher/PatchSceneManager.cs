@@ -81,21 +81,21 @@ namespace PvpArena.MonoBehaviours.Patcher
         public float saturation = 0.5f;
         public bool ignorePlatformSaturationModifiers = false;
         public AnimationCurve redChannel = new AnimationCurve(
-            new Keyframe[]
+            new[]
             {
                 new Keyframe(0, 0),
                 new Keyframe(1, 1), 
             }
         );
         public AnimationCurve greenChannel = new AnimationCurve(
-            new Keyframe[]
+            new[]
             {
                 new Keyframe(0, 0),
                 new Keyframe(1, 1),
             }
         );
         public AnimationCurve blueChannel = new AnimationCurve(
-            new Keyframe[]
+            new[]
             {
                 new Keyframe(0, 0),
                 new Keyframe(1, 1),
@@ -112,7 +112,7 @@ namespace PvpArena.MonoBehaviours.Patcher
 
         public void Awake()
         {
-            GameObject actualSceneManager = GameObject.Instantiate(PrefabHolder.popSceneManagerPrefab);
+            GameObject actualSceneManager = Instantiate(PrefabHolder.PopSceneManagerPrefab);
             actualSceneManager.SetActive(false);
 
             var sm = actualSceneManager.GetComponent<SceneManager>();
@@ -138,7 +138,7 @@ namespace PvpArena.MonoBehaviours.Patcher
             sm.SetAttr("musicTransitionTime", musicTransitionTime);
 
             AtmosCue ac = ScriptableObject.CreateInstance<AtmosCue>();
-            ac.SetAttr("isChannelEnabled", new bool[]
+            ac.SetAttr("isChannelEnabled", new[]
             {
                 false, false, false, false,
                 false, false, false, false,
@@ -149,7 +149,7 @@ namespace PvpArena.MonoBehaviours.Patcher
             sm.SetAttr("atmosCue", ac);
 
             actualSceneManager.SetActive(true);
-            GameObject.Destroy(this);
+            Destroy(this);
         }
     }
 }

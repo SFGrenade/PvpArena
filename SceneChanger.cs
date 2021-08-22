@@ -1,31 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using GlobalEnums;
-using HutongGames.PlayMaker;
-using On;
 using Logger = Modding.Logger;
 using UnityEngine.SceneManagement;
-using UnityEngine.Audio;
-using HutongGames.PlayMaker.Actions;
-using SFCore.MonoBehaviours;
-using PvpArena.MonoBehaviours;
-using PvpArena.Consts;
-using PvpArena.MonoBehaviours.Patcher;
-using UnityEngine.UI;
 using UObject = UnityEngine.Object;
-using SFCore.Utils;
 
 namespace PvpArena
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const bool _DEBUG = true;
-        private const string _AB_PATH = "E:\\Github_Projects\\PvpArena Assets\\Assets\\AssetBundles\\";
+        private const bool Debug = true;
+        private const string AbPath = "E:\\Github_Projects\\PvpArena Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbPvpScene { get; private set; } = null;
         public AssetBundle AbPvpMat { get; private set; } = null;
@@ -34,19 +21,19 @@ namespace PvpArena
         {
             On.GameManager.RefreshTilemapInfo += OnGameManagerRefreshTilemapInfo;
 
-            PrefabHolder.preloaded(preloadedObjects);
+            PrefabHolder.Preloaded(preloadedObjects);
 
-            Assembly _asm;
+            Assembly asm;
 
             #region Load AssetBundles
 #pragma warning disable CS0162 // Unerreichbarer Code wurde entdeckt.
             Log("Loading AssetBundles");
-            _asm = Assembly.GetExecutingAssembly();
+            asm = Assembly.GetExecutingAssembly();
             if (AbPvpScene == null)
             {
-                if (!_DEBUG)
+                if (!Debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("PvpArena.Resources.pvparenascenes"))
+                    using (Stream s = asm.GetManifestResourceStream("PvpArena.Resources.pvparenascenes"))
                     {
                         if (s != null)
                         {
@@ -56,14 +43,14 @@ namespace PvpArena
                 }
                 else
                 {
-                    AbPvpScene = AssetBundle.LoadFromFile(_AB_PATH + "pvparenascenes");
+                    AbPvpScene = AssetBundle.LoadFromFile(AbPath + "pvparenascenes");
                 }
             }
             if (AbPvpMat == null)
             {
-                if (!_DEBUG)
+                if (!Debug)
                 {
-                    using (Stream s = _asm.GetManifestResourceStream("PvpArena.Resources.pvparenaassets"))
+                    using (Stream s = asm.GetManifestResourceStream("PvpArena.Resources.pvparenaassets"))
                     {
                         if (s != null)
                         {
@@ -73,7 +60,7 @@ namespace PvpArena
                 }
                 else
                 {
-                    AbPvpMat = AssetBundle.LoadFromFile(_AB_PATH + "pvparenaassets");
+                    AbPvpMat = AssetBundle.LoadFromFile(AbPath + "pvparenaassets");
                 }
             }
             Log("Finished loading AssetBundles");
@@ -112,7 +99,7 @@ namespace PvpArena
         {
             Log("!CreateDoor");
 
-            GameObject gate = GameObject.Instantiate(GameObject.Find("door_mapper"));
+            GameObject gate = Instantiate(GameObject.Find("door_mapper"));
             gate.name = gateName;
             gate.transform.position = pos;
             var tp = gate.GetComponent<TransitionPoint>();
@@ -141,7 +128,7 @@ namespace PvpArena
             Log("~CreateDoor");
         }
 
-        private void printDebug(GameObject go, string tabindex = "")
+        private void PrintDebug(GameObject go, string tabindex = "")
         {
             Log(tabindex + "Name: " + go.name);
             foreach (var comp in go.GetComponents<Component>())
@@ -150,24 +137,24 @@ namespace PvpArena
             }
             for (int i = 0; i < go.transform.childCount; i++)
             {
-                printDebug(go.transform.GetChild(i).gameObject, tabindex + "\t");
+                PrintDebug(go.transform.GetChild(i).gameObject, tabindex + "\t");
             }
         }
 
         private void Log(String message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
         private void Log(System.Object message)
         {
-            Logger.Log($"[{this.GetType().FullName.Replace(".", "]:[")}] - {message.ToString()}");
+            Logger.Log($"[{GetType().FullName.Replace(".", "]:[")}] - {message}");
         }
 
         private static void SetInactive(GameObject go)
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                DontDestroyOnLoad(go);
                 go.SetActive(false);
             }
         }
@@ -175,7 +162,7 @@ namespace PvpArena
         {
             if (go != null)
             {
-                UnityEngine.Object.DontDestroyOnLoad(go);
+                DontDestroyOnLoad(go);
             }
         }
     }
