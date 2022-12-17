@@ -11,8 +11,8 @@ namespace PvpArena
 {
     public class SceneChanger : MonoBehaviour
     {
-        private const bool Debug = true;
-        private const string AbPath = "E:\\Github_Projects\\PvpArena Assets\\Assets\\AssetBundles\\";
+        private const bool Debug = false;
+        private const string AbPath = "E:\\Documents\\Projects\\Unity Projects\\PvpArena Assets\\Assets\\AssetBundles\\";
 
         public AssetBundle AbPvpScene { get; private set; } = null;
         public AssetBundle AbPvpMat { get; private set; } = null;

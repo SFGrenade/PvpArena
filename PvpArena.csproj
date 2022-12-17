@@ -16,8 +16,13 @@
     <HollowKnightRefs Condition="$([MSBuild]::IsOSPlatform('Windows'))">E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/</HollowKnightRefs>
     <ExportDir Condition="$([MSBuild]::IsOSPlatform('Linux'))">/home/sfg/Documents/Projects/__Exports/</ExportDir>
     <ExportDir Condition="$([MSBuild]::IsOSPlatform('Windows'))">E:/Documents/Projects/__Exports/</ExportDir>
+    <UnityDir Condition="$([MSBuild]::IsOSPlatform('Windows'))">E:/Documents/Projects/Unity Projects/PvpArena Assets/</UnityDir>
     <!--<DocumentationFile>$(OutputPath)/$(AssemblyTitle).xml</DocumentationFile>-->
   </PropertyGroup>
+  <Target Name="CopyAssetbundles" BeforeTargets="PreBuildEvent">
+    <Delete Condition="$([MSBuild]::IsOSPlatform('Windows'))" Files="$(ProjectDir)/Resources/pvparenaassets;$(ProjectDir)/Resources/pvparenascenes" />
+    <Copy Condition="$([MSBuild]::IsOSPlatform('Windows'))" SourceFiles="$(UnityDir)/Assets/AssetBundles/pvparenaassets;$(UnityDir)/Assets/AssetBundles/pvparenascenes" DestinationFolder="$(ProjectDir)/Resources/" />
+  </Target>
   <Target Name="CopyMod" AfterTargets="PostBuildEvent">
     <RemoveDir Condition="Exists('$(ExportDir)/$(TargetName)/')" Directories="$(ExportDir)/$(TargetName)/" />
     <MakeDir Directories="$(ExportDir)/$(TargetName)/" />
