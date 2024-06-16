@@ -13,7 +13,7 @@ namespace PvpArena
         public SceneChanger SceneChanger { get; private set; }
 
         public override string GetVersion() => SFCore.Utils.Util.GetVersion(Assembly.GetExecutingAssembly());
-        
+
         public override List<ValueTuple<string, string>> GetPreloadNames()
         {
             return new List<ValueTuple<string, string>>
