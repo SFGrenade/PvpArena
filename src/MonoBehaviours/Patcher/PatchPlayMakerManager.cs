@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 
-namespace PvpArena.MonoBehaviours.Patcher
-{
-    class PatchPlayMakerManager : MonoBehaviour
-    {
-        public Transform managerTransform;
+namespace PvpArena.MonoBehaviours.Patcher;
 
-        public void Awake()
-        {
-            GameObject tmpPmu2D = Instantiate(PrefabHolder.PopPmU2dPrefab, managerTransform);
-            tmpPmu2D.SetActive(true);
-            tmpPmu2D.name = "PlayMaker Unity 2D";
-        }
+class PatchPlayMakerManager : MonoBehaviour
+{
+    public Transform managerTransform;
+
+    public void Awake()
+    {
+        GameObject tmpPmu2D = Instantiate(PrefabHolder.PopPmU2dPrefab, managerTransform);
+        tmpPmu2D.SetActive(true);
+        tmpPmu2D.name = "PlayMaker Unity 2D";
     }
 }
