@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - TileMap
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Terrain
+  - Player
+  - Transition Gates
+  - Enemies
+  - Projectiles
+  - Hero Detector
+  - Terrain Detector
+  - Enemy Detector
+  - Item
+  - Hero Attack
+  - Particle
+  - Interactive Object
+  - Hero Box
+  - Grass
+  - Enemy Attack
+  - Damage All
+  - Bouncer
+  - Soft Terrain
+  - Corpse
+  - UGUI
+  - 
+  - 
+  - Map Pin
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
