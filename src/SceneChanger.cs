@@ -12,7 +12,7 @@ namespace PvpArena;
 public class SceneChanger : MonoBehaviour
 {
     private const bool Debug = false;
-    private const string AbPath = "E:\\Documents\\Projects\\Unity Projects\\PvpArena Assets\\Assets\\AssetBundles\\";
+    private const string AbPath = "C:\\Users\\SFG\\Documents\\Projects\\Unity Projects\\PvpArena Assets\\Assets\\AssetBundles\\";
 
     public AssetBundle AbPvpScene { get; private set; } = null;
     public AssetBundle AbPvpMat { get; private set; } = null;
